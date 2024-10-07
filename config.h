@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Liberation Mono:pixelsize=16:antialias=true:autohint=true";
+static char *font = "Liberation Mono:pixelsize=17:antialias=true:autohint=true";
 static int borderpx = 0;
 
 /*
@@ -115,41 +115,80 @@ char *termname = "st-256color";
 unsigned int tabspaces = 8;
 
 /* Terminal colors (16 first used in escape sequence) */
-static const char *colorname[] = {
-  /* 8 normal colors */
-  [0] = "#000000", /* black   */
-  [1] = "#ff5555", /* red     */
-  [2] = "#50fa7b", /* green   */
-  [3] = "#f1fa8c", /* yellow  */
-  [4] = "#bd93f9", /* blue    */
-  [5] = "#ff79c6", /* magenta */
-  [6] = "#8be9fd", /* cyan    */
-  [7] = "#bbbbbb", /* white   */
-
-  /* 8 bright colors */
-  [8]  = "#696969", /* black   */
-  [9]  = "#ff5555", /* red     */
-  [10] = "#50fa7b", /* green   */
-  [11] = "#f1fa8c", /* yellow  */
-  [12] = "#bd93f9", /* blue    */
-  [13] = "#ff79c6", /* magenta */
-  [14] = "#8be9fd", /* cyan    */
-  [15] = "#dddddd", /* white   */
-
-  /* special colors */
-  [256] = "#222436", /* background */
-  [257] = "#B5B5B5", /* foreground */
-  [258] = "#cba6f7", /* cursor */
-};
+// static const char *colorname[] = {
+//   /* 8 normal colors */
+//   [0] = "#000000", /* black   */
+//   [1] = "#ff5555", /* red     */
+//   [2] = "#50fa7b", /* green   */
+//   [3] = "#f1fa8c", /* yellow  */
+//   [4] = "#bd93f9", /* blue    */
+//   [5] = "#ff79c6", /* magenta */
+//   [6] = "#8be9fd", /* cyan    */
+//   [7] = "#bbbbbb", /* white   */
+// 
+//   /* 8 bright colors */
+//   [8]  = "#696969", /* black   */
+//   [9]  = "#ff5555", /* red     */
+//   [10] = "#50fa7b", /* green   */
+//   [11] = "#f1fa8c", /* yellow  */
+//   [12] = "#bd93f9", /* blue    */
+//   [13] = "#ff79c6", /* magenta */
+//   [14] = "#8be9fd", /* cyan    */
+//   [15] = "#dddddd", /* white   */
+// 
+//   /* special colors */
+//   [256] = "#222436", /* background */
+//   [257] = "#B5B5B5", /* foreground */
+//   [258] = "#cba6f7", /* cursor */
+// };
 
 /*
  * Default colors (colorname index)
  * foreground, background, cursor, reverse cursor
  */
-unsigned int defaultfg = 257;
-unsigned int defaultbg = 256;
-static unsigned int defaultcs = 258;
-static unsigned int defaultrcs = 258;
+// unsigned int defaultfg = 257;
+// unsigned int defaultbg = 256;
+// static unsigned int defaultcs = 258;
+// static unsigned int defaultrcs = 258;
+// cappuccin
+//
+/* Terminal colors (16 first used in escape sequence) */
+static const char *colorname[] = {
+	/* 8 normal colors */
+	"#494D64",
+	"#ED8796",
+	"#A6DA95",
+	"#EED49F",
+	"#8AADF4",
+	"#F5BDE6",
+	"#8BD5CA",
+	"#B8C0E0",
+
+	/* 8 bright colors */
+	"#5B6078",
+	"#ED8796",
+	"#A6DA95",
+	"#EED49F",
+	"#8AADF4",
+	"#F5BDE6",
+	"#8BD5CA",
+	"#A5ADCB",
+
+[256] = "#CAD3F5", /* default foreground colour */
+[257] = "#24273A", /* default background colour */
+[258] = "#F4DBD6", /*575268*/
+[259] = "#cba6f7", // cursor 
+
+};
+
+
+/*
+ * foreground, background, cursor, reverse cursor
+ */
+unsigned int defaultfg = 256;
+unsigned int defaultbg = 257;
+unsigned int defaultcs = 259;
+static unsigned int defaultrcs = 259;
 
 /*
  * Default shape of cursor
@@ -211,8 +250,10 @@ static Shortcut shortcuts[] = {
 	{ ControlMask,          XK_Print,       toggleprinter,  {.i =  0} },
 	{ ShiftMask,            XK_Print,       printscreen,    {.i =  0} },
 	{ XK_ANY_MOD,           XK_Print,       printsel,       {.i =  0} },
-	{ TERMMOD,              XK_Prior,       zoom,           {.f = +1} },
-	{ TERMMOD,              XK_Next,        zoom,           {.f = -1} },
+	// { TERMMOD,              XK_Prior,       zoom,           {.f = +1} },
+	{ ControlMask,          XK_equal,       zoom,           {.f = +1} },
+	// { TERMMOD,              XK_Next,        zoom,           {.f = -1} },
+	{ ControlMask,          XK_minus,        zoom,           {.f = -1} },
 	{ TERMMOD,              XK_Home,        zoomreset,      {.f =  0} },
 	{ TERMMOD,              XK_C,           clipcopy,       {.i =  0} },
 	{ TERMMOD,              XK_V,           clippaste,      {.i =  0} },
